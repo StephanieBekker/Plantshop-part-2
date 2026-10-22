@@ -332,6 +332,7 @@ input:focus-visible {
 .home-hero-media img {
   display: block;
   width: 100%;
+  height: auto;
   aspect-ratio: 3 / 4;
   object-fit: contain;
   border-radius: 18px;
@@ -438,6 +439,7 @@ input:focus-visible {
 .product-image-link img {
   display: block;
   width: 100%;
+  height: auto;
   aspect-ratio: 1 / 1;
   object-fit: contain;
   background: #e2e9e1;
@@ -869,10 +871,12 @@ input:focus-visible {
   min-width: 0;
 }
 
-.plant-main-image {
-  display: block;
-  width: 100%;
+.plant-gallery-main {
+  position: relative;
   aspect-ratio: 3 / 4;
+}
+
+.plant-main-image {
   object-fit: contain;
   border-radius: 18px;
   background: #eee9df;
