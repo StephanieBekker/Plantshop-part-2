@@ -1,14 +1,31 @@
 "use client";
 
-// This client provider shares cart state across routes; a full reload creates a new cart.
+// Share cart state across routes and restore saved selections after hydration.
 
 import { createContext, useContext, useEffect, useState } from "react";
 
+import products from "@/data/product";
+import { loadCart, saveCart } from "@/lib/cartStorage";
+
+const storageKey = "spire-part-2-cart";
 const CartContext = createContext(null);
 
 export default function CartProvider({ children }) {
   const [items, setItems] = useState([]);
   const [orderPlaced, setOrderPlaced] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    // Like the teaching example, restore browser-only storage after hydration.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setItems(loadCart(storageKey, products));
+    setLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    // Do not overwrite a saved cart with the empty server-rendered initial state.
+    if (loaded) saveCart(storageKey, items);
+  }, [items, loaded]);
 
   useEffect(() => {
     if (!orderPlaced) return;
