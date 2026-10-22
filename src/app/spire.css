@@ -685,8 +685,7 @@ input:focus-visible {
   font-size: 1rem;
 }
 
-.cart .clear-cart,
-.checkout .clear-cart {
+.cart .clear-cart {
   display: block;
   margin-top: 20px;
   padding: 8px 0;

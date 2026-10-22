@@ -9,7 +9,7 @@ import CheckoutFields from "@/components/checkout/CheckoutFields";
 import OrderSummary from "@/components/checkout/OrderSummary";
 
 export default function CheckoutForm() {
-  const { items, total, clearCart, completeOrder } = useCart();
+  const { items, total, completeOrder } = useCart();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
@@ -79,15 +79,6 @@ export default function CheckoutForm() {
 
         <button className="place-order" type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Placing order..." : "Place Order"}
-        </button>
-
-        <button
-          className="clear-cart"
-          type="button"
-          disabled={isSubmitting}
-          onClick={clearCart}
-        >
-          Clear Cart
         </button>
       </OrderSummary>
     </form>
