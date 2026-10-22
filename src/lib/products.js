@@ -1,3 +1,4 @@
+import { cacheLife } from "next/cache";
 import products from "@/data/product";
 
 const scientificNames = [
@@ -17,6 +18,11 @@ const scientificNames = [
 ];
 
 export async function getProducts() {
+    "use cache";
+
+    // Share the cached catalogue between Shop and featured products.
+    cacheLife("hours");
+
     const token = process.env.TREFLE_API_TOKEN;
 
     if (!token) {
@@ -59,6 +65,11 @@ export async function getProducts() {
 }
 
 export async function getProduct(id) {
+    "use cache";
+
+    // Reuse plant information and refresh it after the cache interval.
+    cacheLife("hours");
+
     const product = products.find((item) => String(item.id) === id);
 
     if (!product) { return null; }
