@@ -1,14 +1,28 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const CartContext = createContext(null);
 
 export default function CartProvider({ children }) {
   const [items, setItems] = useState([]);
+  const [orderPlaced, setOrderPlaced] = useState(false);
+
+  useEffect(() => {
+    if (!orderPlaced) return;
+
+    // Keep the confirmation timer running across route changes.
+    const timer = setTimeout(() => {
+      setOrderPlaced(false);
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, [orderPlaced]);
 
   function addToCart(product, quantity = 1) {
     if (!Number.isInteger(quantity) || quantity < 1) return;
+
+    setOrderPlaced(false);
 
     setItems((currentItems) => {
       const existingItem = currentItems.find((item) => item.id === product.id);
@@ -50,9 +64,19 @@ export default function CartProvider({ children }) {
 
   function clearCart() {
     setItems([]);
+    setOrderPlaced(false);
   }
 
-  // Derive these values from the items so they stay consistent.
+  function completeOrder() {
+    setItems([]);
+    setOrderPlaced(true);
+  }
+
+  function dismissOrderConfirmation() {
+    setOrderPlaced(false);
+  }
+
+  // Derive totals from the items so all views use the same values.
   const itemCount = items.reduce((count, item) => count + item.quantity, 0);
 
   const total = items.reduce(
@@ -66,10 +90,13 @@ export default function CartProvider({ children }) {
         items,
         itemCount,
         total,
+        orderPlaced,
         addToCart,
         setQuantity,
         removeItem,
         clearCart,
+        completeOrder,
+        dismissOrderConfirmation,
       }}
     >
       {children}
