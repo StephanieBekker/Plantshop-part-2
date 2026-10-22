@@ -1,3 +1,4 @@
+// A server component renders product content and delegates cart interaction to a client component.
 import Image from "next/image";
 import Link from "next/link";
 import plantDetails from "@/data/plantDetails";

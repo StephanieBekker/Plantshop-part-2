@@ -1,5 +1,7 @@
 "use client";
 
+// The layout keeps this notice mounted while checkout navigates back to Home.
+
 import { useCart } from "@/components/cart/CartProvider";
 import Icon from "@/components/ui/Icon";
 

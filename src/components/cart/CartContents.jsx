@@ -1,5 +1,7 @@
 "use client";
 
+// Cart and checkout derive their totals from the same provider items.
+
 import Link from "next/link";
 import CartItem from "@/components/cart/CartItem";
 import { useCart } from "@/components/cart/CartProvider";
@@ -12,10 +14,7 @@ export default function CartContents() {
       <h2>Your items</h2>
 
       {items.length === 0 ? (
-        <>
-          <p>Your cart is empty.</p>
-          <Link href="/shop">Explore our plants</Link>
-        </>
+        <p>Your cart is empty.</p>
       ) : (
         <>
           <div className="cart-columns" aria-hidden="true">

@@ -1,20 +1,28 @@
 # SPIRE — Part 2
 
-A plant shop rebuilt with Next.js App Router for a school assignment.
+A plant shop rebuilt with Next.js App Router.
 
-## Requirements
+## Getting Started
 
-- Node.js 24 LTS
-- npm
-
-## Install and run
+Use Node.js 24 LTS and install dependencies:
 
 ```bash
 npm ci
+```
+
+Create `.env.local` in the project root and add your Trefle API token:
+
+```env
+TREFLE_API_TOKEN=your_token_here
+```
+
+Start the development server:
+
+```bash
 npm run dev
 ```
 
-Open http://localhost:3000.
+Open [http://localhost:3000](http://localhost:3000).
 
 ## Checks
 
@@ -23,23 +31,15 @@ npm run lint
 npm run build
 ```
 
-## Project structure
+## Deployment
 
-- `src/app`: routes, shared layout and styles
-- `src/components`: reusable components
-- `src/data`: product and plant-care data
-- `public`: images and icons
+[View SPIRE](https://plantshop-part-2.vercel.app/)
 
-## Current status
+GitHub Actions runs lint and build on pushes and pull requests to `main`.
+Vercel automatically deploys pushes to `main`.
 
-The project foundation is being prepared. Product pages, server data
-fetching, cart interactions and checkout are not implemented yet.
-
-## Continuous integration
-
-GitHub Actions installs dependencies with `npm ci`, runs ESLint and
-builds the application on pushes and pull requests to `main`.
+Set `TREFLE_API_TOKEN` in GitHub Actions secrets and Vercel environment variables.
 
 ## Credits
 
-Plant information: Trefle.io.
+Plant data: [Trefle.io](https://trefle.io/) — CC BY 4.0.

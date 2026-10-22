@@ -7,7 +7,7 @@ export default function Checkout() {
       <h1>Checkout</h1>
 
       <Link className="back-link" href="/cart">
-        ← Back to cart
+        ← Back to Cart
       </Link>
 
       <CheckoutForm />

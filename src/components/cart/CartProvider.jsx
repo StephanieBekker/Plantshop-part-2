@@ -1,5 +1,7 @@
 "use client";
 
+// This client provider shares cart state across routes; a full reload creates a new cart.
+
 import { createContext, useContext, useEffect, useState } from "react";
 
 const CartContext = createContext(null);
@@ -20,12 +22,16 @@ export default function CartProvider({ children }) {
   }, [orderPlaced]);
 
   function addToCart(product, quantity = 1) {
-    if (!Number.isInteger(quantity) || quantity < 1) return;
+    if (!Number.isSafeInteger(quantity) || quantity < 1) return;
 
     setOrderPlaced(false);
 
     setItems((currentItems) => {
       const existingItem = currentItems.find((item) => item.id === product.id);
+      // Combined quantities must also remain exact whole numbers.
+      if (existingItem && !Number.isSafeInteger(existingItem.quantity + quantity)) {
+        return currentItems;
+      }
 
       if (existingItem) {
         return currentItems.map((item) =>
@@ -49,7 +55,7 @@ export default function CartProvider({ children }) {
   }
 
   function setQuantity(id, quantity) {
-    if (!Number.isInteger(quantity) || quantity < 1) return;
+    if (!Number.isSafeInteger(quantity) || quantity < 1) return;
 
     setItems((currentItems) =>
       currentItems.map((item) =>

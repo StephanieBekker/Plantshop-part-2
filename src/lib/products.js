@@ -1,3 +1,4 @@
+// Server functions combine Trefle data with local prices and images. Never expose the token to client code.
 import { cacheLife } from "next/cache";
 import products from "@/data/product";
 
@@ -108,3 +109,15 @@ export async function getProduct(id) {
     };
 }
 
+
+// Like Part 1, keep local products available when the catalogue API fails.
+export async function getCatalogue() {
+    try {
+        return { products: await getProducts(), error: "" };
+    } catch {
+        return {
+            products,
+            error: "Live plant information is unavailable. You can still browse our plants.",
+        };
+    }
+}

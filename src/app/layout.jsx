@@ -1,9 +1,9 @@
 import "./globals.css";
 import "./spire.css";
-import Navigation from "@/components/layout/Navigation";
+import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CartProvider from "@/components/cart/CartProvider";
-import OrderNotification from "../components/checkout/OrderNotification";
+import OrderNotification from "@/components/checkout/OrderNotification";
 
 export const metadata = {
   title: "SPIRE",
@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
         {/* Keep the wrapper used by the existing SPIRE styles */}
         <div id="root">
           <CartProvider>
-            <Navigation />
+            <Navbar />
             {children}
             <OrderNotification />
             <Footer />

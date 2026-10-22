@@ -1,5 +1,7 @@
 "use client";
 
+// One section opens at a time; hidden panels remain linked to their heading buttons.
+
 import { useState } from "react";
 
 export default function Accordion({ sections, defaultOpenId = null }) {

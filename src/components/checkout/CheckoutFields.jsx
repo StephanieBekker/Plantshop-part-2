@@ -1,3 +1,4 @@
+// Native labels, input types and required fields provide browser form validation.
 export default function CheckoutFields() {
   return (
     <section className="order-products">

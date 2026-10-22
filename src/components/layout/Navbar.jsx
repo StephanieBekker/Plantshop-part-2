@@ -1,12 +1,14 @@
 "use client";
 
+// Checkout is reached through the cart; this menu shares the provider cart count.
+
 import { useState } from "react";
-import Link from "next/link";
+import NavbarLink from "./NavbarLink";
 import MiniCart from "@/components/cart/MiniCart";
 import { useCart } from "@/components/cart/CartProvider";
 import Icon from "@/components/ui/Icon";
 
-export default function Navigation() {
+export default function Navbar() {
   const { itemCount } = useCart();
   const [previewOpen, setPreviewOpen] = useState(false);
 
@@ -19,15 +21,12 @@ export default function Navigation() {
 
   return (
     <nav className="navbar" aria-label="Main navigation">
-      <Link className="brand" href="/">
+      <NavbarLink className="brand" href="/">
         SPIRE
-      </Link>
-      <Link className="nav-link" href="/shop">
+      </NavbarLink>
+      <NavbarLink className="nav-link" href="/shop">
         Shop
-      </Link>
-      <Link className="nav-link" href="/checkout">
-        Checkout
-      </Link>
+      </NavbarLink>
 
       <div
         className="cart-menu"
@@ -53,7 +52,7 @@ export default function Navigation() {
         }}
       >
         {/* The link also provides normal cart access on touch screens. */}
-        <Link
+        <NavbarLink
           className="cart-link nav-link"
           href="/cart"
           aria-label={`Cart with ${itemCount} ${
@@ -65,7 +64,7 @@ export default function Navigation() {
             <Icon name="shoppingBag" size={32} className="bag-icon" />
             {itemCount > 0 && <span className="cart-count">{itemCount}</span>}
           </span>
-        </Link>
+        </NavbarLink>
 
         <MiniCart open={previewOpen} onNavigate={() => setPreviewOpen(false)} />
       </div>

@@ -11,7 +11,7 @@ export default function AddToCartButton({ product }) {
       type="button"
       onClick={() => addToCart(product)}
     >
-      Add to cart
+      Add to Cart
     </button>
   );
 }

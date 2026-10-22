@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
+import ProductGridSkeleton from "@/components/products/ProductGridSkeleton";
 import FeaturedProducts from "@/components/products/FeaturedProducts";
 import products from "@/data/product";
 
@@ -41,7 +42,7 @@ export default function Home() {
           <h2 id="featured-heading">Find your next green favourite</h2>
           <Link href="/shop">View all plants</Link>
         </div>
-        <Suspense fallback={<p role="status">Loading...</p>}>
+        <Suspense fallback={<ProductGridSkeleton count={3} />}>
           <FeaturedProducts />
         </Suspense>
       </section>

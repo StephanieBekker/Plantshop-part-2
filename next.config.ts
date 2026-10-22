@@ -1,3 +1,4 @@
+// Cache Components enables the use cache directives in the server data functions.
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {

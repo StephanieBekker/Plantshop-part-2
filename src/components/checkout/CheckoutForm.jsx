@@ -1,5 +1,7 @@
 "use client";
 
+// Submit only product IDs and quantities; the Route Handler validates them and uses server prices.
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/components/cart/CartProvider";

@@ -1,5 +1,7 @@
 "use client";
 
+// Only image selection needs client state; the product data arrives through props.
+
 import Image from "next/image";
 import { useState } from "react";
 

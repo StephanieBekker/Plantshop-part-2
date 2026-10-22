@@ -1,3 +1,4 @@
+// Children place the form actions and request feedback below the shared summary.
 import Image from "next/image";
 
 export default function OrderSummary({ items, total, children }) {

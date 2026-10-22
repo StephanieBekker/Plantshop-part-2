@@ -1,4 +1,6 @@
 "use client";
+
+// Quantity changes update the shared cart; decreasing the last unit removes the row.
 import Image from "next/image";
 import Icon from "@/components/ui/Icon";
 import { useCart } from "@/components/cart/CartProvider";
@@ -25,7 +27,7 @@ export default function CartItem({ item }) {
       />
 
       <p className="cart-unit-price">
-        <span className="cart-price-label">Each:</span>
+        <span className="cart-price-label">Each: </span>
         {item.price} kr
       </p>
 
@@ -46,6 +48,7 @@ export default function CartItem({ item }) {
           className="quantity-input"
           type="number"
           min="1"
+          max={Number.MAX_SAFE_INTEGER}
           step="1"
           aria-label={`Quantity of ${item.name}`}
           value={item.quantity}

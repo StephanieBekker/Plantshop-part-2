@@ -4,7 +4,8 @@ import { useState } from "react";
 import { useCart } from "@/components/cart/CartProvider";
 
 export default function AddToCartForm({ product }) {
-  const { addToCart } = useCart();
+  const { items, addToCart } = useCart();
+  const cartQuantity = items.find((item) => item.id === product.id)?.quantity ?? 0;
   const [quantity, setQuantity] = useState("1");
   const [cartMessage, setCartMessage] = useState("");
 
@@ -13,7 +14,13 @@ export default function AddToCartForm({ product }) {
     const amount = Number(quantity);
 
     // Validate the amount before updating the shared cart.
-    if (!Number.isInteger(amount) || amount < 1) return;
+    if (
+      !Number.isSafeInteger(amount) || amount < 1 ||
+      !Number.isSafeInteger(cartQuantity + amount)
+    ) {
+      setCartMessage("Enter a valid whole quantity of at least 1.");
+      return;
+    }
 
     addToCart(product, amount);
     setCartMessage(
@@ -23,8 +30,9 @@ export default function AddToCartForm({ product }) {
 
   function changeQuantity(change) {
     const current = Number(quantity);
-    const valid = Number.isInteger(current) && current >= 1 ? current : 1;
-    setQuantity(String(Math.max(1, valid + change)));
+    const valid = Number.isSafeInteger(current) && current >= 1 ? current : 1;
+    const nextQuantity = Math.max(1, valid + change);
+    if (Number.isSafeInteger(nextQuantity)) setQuantity(String(nextQuantity));
   }
 
   return (
@@ -40,6 +48,7 @@ export default function AddToCartForm({ product }) {
               id="plant-quantity"
               type="number"
               min="1"
+              max={Number.MAX_SAFE_INTEGER}
               step="1"
               required
               value={quantity}

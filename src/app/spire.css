@@ -658,7 +658,6 @@ input:focus-visible {
 .trash-icon {
   width: 16px;
   height: 16px;
-  stroke: currentColor;
   transition: transform 150ms ease;
 }
 
