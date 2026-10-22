@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Accordion from "@/components/Accordion";
-import Icon from "@/components/Icon";
-import ProductCard from "@/components/ProductCard";
-import ProductGallery from "@/components/ProductGallery";
+import Accordion from "@/components/ui/Accordion";
+import Icon from "@/components/ui/Icon";
+import ProductCard from "@/components/products/ProductCard";
+import ProductGallery from "@/components/products/ProductGallery";
 import plantDetails from "@/data/plantDetails";
+import AddToCartForm from "@/components/cart/AddToCartForm";
 import { getProduct, getProducts } from "@/lib/products";
 
 export default async function ProductPage({ params }) {
@@ -113,8 +114,18 @@ export default async function ProductPage({ params }) {
           <p className="plant-price">{product.price} kr</p>
           {description && <p>{description}</p>}
 
+          <AddToCartForm
+            key={`purchase-${product.id}`}
+            product={{
+              id: product.id,
+              name: product.name,
+              price: product.price,
+              image: product.image,
+            }}
+          />
+
           <Accordion
-            key={product.id}
+            key={`info-${product.id}`}
             sections={sections}
             defaultOpenId="plant-care"
           />

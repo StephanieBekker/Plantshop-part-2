@@ -1,4 +1,4 @@
-import ProductCard from "@/components/ProductCard";
+import ProductCard from "@/components/products/ProductCard";
 import { getProducts } from "@/lib/products";
 
 export default async function Shop() {

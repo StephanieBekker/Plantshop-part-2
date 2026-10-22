@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import plantDetails from "@/data/plantDetails";
+import AddToCartButton from "@/components/cart/AddToCartButton";
 
 export default function ProductCard({ product, headingLevel = "h2" }) {
   const Heading = headingLevel;
@@ -30,6 +31,8 @@ export default function ProductCard({ product, headingLevel = "h2" }) {
       {description && <p className="product-fact">{description}</p>}
 
       <p>{product.price} kr</p>
+
+      <AddToCartButton product={product} />
     </article>
   );
 }

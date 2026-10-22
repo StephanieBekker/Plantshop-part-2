@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
-import FeaturedProducts from "@/components/FeaturedProducts";
+import FeaturedProducts from "@/components/products/FeaturedProducts";
 import products from "@/data/product";
 
 const heroPlant = products.find((product) => product.id === 2);
